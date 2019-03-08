@@ -6,37 +6,39 @@ import SEO from "Components/seo"
 import PillarTemplate from "Components/pillars/template"
 import PageTitle from "Common/PageTitle"
 
-export default props => {
-  const { data: { innovation, innovationJson } } = props
+function InnovationPage({ data, ...props }) {
+  const { innovation, markdownRemark } = data
   return (
     <Layout pageProps={props}>
-      <SEO title="Innovation" keywords={["san diego", "tech", "hub", "pillar", "innovation"]} />
-      <PageTitle>
-        Innovation
-      </PageTitle>
-      <PillarTemplate
-        data={innovationJson}
-        icon={innovation}
+      <SEO
+        title="Innovation"
+        keywords={["san diego", "tech", "hub", "pillar", "innovation"]}
       />
+      <PageTitle>Innovation</PageTitle>
+      <PillarTemplate data={markdownRemark.frontmatter} icon={innovation} />
     </Layout>
   )
 }
 
+export default InnovationPage
+
 export const query = graphql`
-query INNOVATION_QUERY {
-  innovationJson {
-    pageTitle
-    purpose
-    challenge
-    leads {
-      name
-      email
-      bio
-      photo
+  query INNOVATION_QUERY {
+    markdownRemark(frontmatter: { path: { eq: "innovation" } }) {
+      frontmatter {
+        pageTitle
+        purpose
+        challenge
+        leads {
+          name
+          email
+          bioDescription
+          photo
+        }
+      }
+    }
+    innovation: file(relativePath: { eq: "innovation-page.png" }) {
+      ...childSharp
     }
   }
-  innovation: file(relativePath: { eq: "innovation-page.png" }) {
-    ...childSharp
-  }
-}
 `

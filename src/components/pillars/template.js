@@ -47,7 +47,7 @@ const PillarTemplate = ({ data, icon }) => (
             </div>
             <span style={{ padding: ".5rem" }}>
               <h5>Biography</h5>
-              <div dangerouslySetInnerHTML={{ __html: lead.bio }} />
+              <div dangerouslySetInnerHTML={{ __html: lead.bioDescription }} />
             </span>
           </div>
         ))}

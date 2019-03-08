@@ -1,0 +1,67 @@
+backend:
+  name: git-gateway
+  branch: master
+  accept_roles:
+    - admin
+
+media_folder: static/assets
+public_folder: assets
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: home
+        label: Home
+        file: "src/data/content/home.md"
+        fields:
+          - { name: "path", label: "Path", widget: "hidden", default: "home" }
+          - { name: "firstSectionTitle", label: "First Section Title" }
+          - {
+              name: "firstSectionDescription",
+              label: "Firs Section Description",
+              widget: "markdown",
+            }
+          - { name: "secondSectionTitle", label: "Second Section Title" }
+          - {
+              name: "secondSectionDescription",
+              label: "Second Section Description",
+              widget: "markdown",
+            }
+      
+      - name: about
+        label: About
+        file: "src/data/content/about.md"
+        fields:
+          - { name: "path", label: "Path", widget: "hidden", default: "about" }
+          - { name: "firstSectionTitle", label: "First Section Title"}
+          - { name: "secondSectionTitle", label: "Second Section Title" }
+          - {
+              name: "secondSectionDescription",
+              label: "Second Section Description",
+              widget: "markdown",
+            }
+          - { name: "thirdSectionTitle", label: "third Section Title" }
+          - {
+              name: "thirdSectionDescription",
+              label: "Third Section Description",
+              widget: "markdown",
+            }
+          - { name: "fourthSectionTitle", label: "fourth Section Title" }
+          - {
+              name: "fourthSectionDescription",
+              label: "Fourth Section Description",
+              widget: "markdown",
+            }
+
+      - name: leadership
+        label: Leadership
+        file: "src/data/content/leadership.md"
+        fields:
+          - { name: "path", label: "Path", widget: "hidden", default: "leadership" }
+          - { name: "firstSectionTitle", label: "First Section Title"}
+          - {
+              name: "firstSectionDescription",
+              label: "First Section Description",
+              widget: "markdown",
+            }

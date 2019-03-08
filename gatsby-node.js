@@ -1,5 +1,7 @@
 const { google } = require("googleapis")
 const path = require("path")
+const remark = require("remark")
+const remarkHtml = require("remark-html")
 const transformers = require("./src/data/transformers")
 
 const { GC_ID } = process.env
@@ -120,6 +122,21 @@ exports.onCreateNode = ({
     const newNode = Object.assign({}, model, nodeMeta)
     createNode(newNode)
     createParentChildLink({ parent: node, child: newNode })
+  }
+
+  // Convert any Markdown in frontmatter fields to HTML
+  if (node.internal.type === "MarkdownRemark" && !!node.frontmatter) {
+    Object.keys(node.frontmatter).forEach(key => {
+      // any frontmatter key with `Description` in it will be transformed to HTML
+      if (key.includes("Description")) {
+        const markdown = node.frontmatter[key]
+        // eslint-disable-next-line
+        node.frontmatter[key] = remark()
+          .use(remarkHtml)
+          .processSync(markdown)
+          .toString()
+      }
+    })
   }
 }
 
