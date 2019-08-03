@@ -22,7 +22,7 @@ collections:
               label: "Collaboration Description",
               widget: "markdown",
             }
-          - label: "Collboration Items"
+          - label: "Collaboration Items"
             name: "collabItems"
             widget: "list"
             fields:
